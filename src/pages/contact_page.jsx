@@ -9,6 +9,8 @@ return(
     <div className="contact_left">
         <h1>Contact Us</h1>
         <div className="photo_frame">
+            <h3> Register forms </h3>
+            <button>Register Now</button>
             <img src={jumper_wires} alt="" className="jumper_wires" />
             <img src={led} alt="" className="LED" />
         </div>

@@ -9,7 +9,7 @@ function AboutPage() {
             <div className="about_top">
                 <section className="intro_sec"> 
                     <h1>About Page</h1>
-                    <p>## About Text Goes Here ##</p>
+                    <p>## About our organization ##</p>
                 </section>
 
                 <section className="about_info_sec">

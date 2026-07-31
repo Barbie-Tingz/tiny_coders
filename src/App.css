@@ -51,13 +51,38 @@
 
 
 /* Navigation Bar */
+/* Navigation Bar */
 .navbar {
-    background-color: var(--red);
-    color: var(--navy);
+    color: white;
     display: flex;
     list-style: none;
     justify-content: center;
     gap: 20px;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #E8175D;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+.navbar a:hover::after,
+.navbar a.active::after {
+    transform: scaleX(1);
 }
 
 .footer {
@@ -156,4 +181,41 @@
 
 .contact_card_two {
     background-color: var(--blush-pink);
+}
+
+/* Video Page */
+.video_page {
+    background-color: var(--blush-pink);
+}
+
+.video_card iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 12px;
+}
+
+.video_grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    padding: 40px;
+}
+
+.video_card {
+    padding: 40px;
+    border-radius: 16px;
+    color: var(--navy);
+}
+
+.video_card_one   { background-color: var(--chartreuse); }
+.video_card_two   { background-color: var(--red); color: white; }
+.video_card_three { background-color: var(--orange); }
+.video_card_four  { background-color: var(--periwinkle-blue); color: white; }
+
+@media (max-width: 480px) {
+    .video_grid {
+        grid-template-columns: 1fr;
+    }
 }

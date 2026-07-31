@@ -4,15 +4,18 @@ import HomePage from './pages/home_page'
 import VideoPage from './pages/video_page'
 import Navbar from './shared_components/navbar'
 import Footer from './shared_components/footer'
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
     return(
         <>
         <Navbar/>
-        <HomePage/>
-        <AboutPage/>
-        <ContactPage/>
-        <VideoPage/>
+        <Routes>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/about" element={<AboutPage/>}/>
+            <Route path="/videos" element={<VideoPage/>}/>
+            <Route path="/contact" element={<ContactPage/>}/>
+        </Routes>
         <Footer/>
         </>
     )

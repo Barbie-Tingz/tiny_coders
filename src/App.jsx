@@ -1,14 +1,21 @@
-function AboutPage() {
+import AboutPage from './pages/about_page'
+import ContactPage from './pages/contact_page'
+import HomePage from './pages/home_page'
+import VideoPage from './pages/video_page'
+import Navbar from './shared_components/navbar'
+import Footer from './shared_components/footer'
+
+function App() {
     return(
         <>
-        <h1>About</h1>
-        <p>## About Text Goes Here ##</p>
+        <Navbar/>
+        <HomePage/>
+        <AboutPage/>
+        <ContactPage/>
+        <VideoPage/>
+        <Footer/>
         </>
     )
 }
 
-function App() {
-    return <AboutPage/>
-}
-
-export default App 
+export default App

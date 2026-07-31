@@ -1,9 +1,9 @@
 function Footer() {
     return(
-        <>
-        <h1>Footer</h1>
-        <p>Tiny Coders LLC</p>
-        </>
+        <div className="footer">
+            <h3>Footer</h3>
+            <p>Tiny Coders LLC</p>
+        </div>
     )
 }
 

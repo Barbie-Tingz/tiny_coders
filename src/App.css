@@ -1,0 +1,159 @@
+:root {
+  --blush-pink: #FFCFEC;   /* right panel background */
+  --orange: #FB883D;       /* left panel background */
+  --red: #D83338;          /* starburst shape */
+  --navy: #1F2F6B;         /* headings & body text */
+  --periwinkle-blue: #566DC4; /* flip-flops, life ring pattern */
+  --chartreuse: #CCD470;   /* small arch shape */
+  --purple-border: #8B3DFF; /* thin outline/border around card */
+}
+
+/* About Page */
+
+.intro_sec {
+    background-color: var(--blush-pink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+}
+
+.intro_sec h1 {
+    color: var(--red);
+}
+
+.about_info_sec {
+    background-color: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+}
+
+.info_frame {
+    position: relative;
+    border: 6px solid var(--chartreuse);
+    border-radius: 12px;
+    padding: 40px;
+    color: var(--blush-pink);
+    text-align: center;
+}
+
+.shape {
+    position: absolute;
+    width: 50px;
+}
+
+.shape_one   { top: -25px;    left: -25px; }
+.shape_two   { top: -25px;    right: -25px; }
+.shape_three { bottom: -25px; left: -25px; }
+.shape_four  { bottom: -25px; right: -25px; }
+
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--red);
+    color: var(--navy);
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer {
+    color:var(--navy); 
+}
+
+/* Home Page */
+
+.home_page {
+    background-color: #FFCFEC;
+}
+
+.section_title {
+    padding: 20px 40px;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto 40px;
+}
+
+.cards_row {
+    display: flex;
+    gap: 24px;
+}
+
+.card {
+    flex: 1;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card_one {
+    background-color: var(--chartreuse);
+}
+
+.card_two {
+    background-color: var(--red);
+    color: white;
+}
+
+.card_three {
+    background-color: var(--orange);
+}
+
+/* Contact Page */
+
+.contact_page {
+    display: flex;
+}
+
+.contact_left {
+    flex: 1.5;
+    background-color: var(--red);
+    color: var(--blush-pink);
+    padding: 40px;
+}
+
+.photo_frame {
+    position: relative;
+    margin-top: 40px;
+    height: 300px;
+}
+
+.jumper_wires {
+    width: 120px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.LED {
+    width: 100px;
+    position: absolute;
+    bottom: 0;
+    right: 40px;
+}
+
+.contact_right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact_card {
+    flex: 1;
+    padding: 40px;
+    color: var(--navy);
+}
+
+.contact_card_one {
+    background-color: var(--chartreuse);
+}
+
+.contact_card_two {
+    background-color: var(--blush-pink);
+}

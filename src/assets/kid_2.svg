@@ -1,0 +1,18 @@
+<svg width="140" height="270" viewBox="0 0 140 270" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="10" width="80" height="70" rx="14" fill="#8A5A3A"/>
+<circle cx="55" cy="45" r="6" fill="#1C1C1C"/><circle cx="85" cy="45" r="6" fill="#1C1C1C"/>
+<path d="M55 62 Q70 70 85 62" stroke="#1C1C1C" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M20 10 Q70 -20 120 10 Q126 45 112 55 Q112 20 95 18 Q78 42 58 20 Q42 42 28 55 Q14 45 20 10 Z" fill="#1C1C1C"/>
+<rect x="20" y="85" width="100" height="90" rx="16" fill="#E8432C"/>
+<rect x="0" y="95" width="26" height="65" rx="12" fill="#E8432C"/><rect x="114" y="95" width="26" height="65" rx="12" fill="#E8432C"/>
+<rect x="-2" y="150" width="30" height="24" rx="8" fill="#8A5A3A"/><rect x="112" y="150" width="30" height="24" rx="8" fill="#8A5A3A"/>
+<rect x="35" y="175" width="30" height="55" rx="10" fill="#2A2A2A"/><rect x="75" y="175" width="30" height="55" rx="10" fill="#2A2A2A"/>
+<rect x="30" y="225" width="40" height="18" rx="6" fill="#5A5A5A"/><rect x="70" y="225" width="40" height="18" rx="6" fill="#5A5A5A"/>
+<g transform="translate(28,105)">
+<rect x="0" y="0" width="64" height="46" rx="4" fill="#FFFFFF" stroke="#E8175D" stroke-width="4"/>
+<circle cx="8" cy="10" r="2.5" fill="#E8175D"/><circle cx="18" cy="10" r="2.5" fill="#E8175D"/><circle cx="28" cy="10" r="2.5" fill="#E8175D"/><circle cx="38" cy="10" r="2.5" fill="#E8175D"/><circle cx="48" cy="10" r="2.5" fill="#E8175D"/><circle cx="58" cy="10" r="2.5" fill="#E8175D"/>
+<circle cx="8" cy="20" r="2.5" fill="#E8175D"/><circle cx="18" cy="20" r="2.5" fill="#E8175D"/><circle cx="28" cy="20" r="2.5" fill="#E8175D"/><circle cx="38" cy="20" r="2.5" fill="#E8175D"/><circle cx="48" cy="20" r="2.5" fill="#E8175D"/><circle cx="58" cy="20" r="2.5" fill="#E8175D"/>
+<circle cx="8" cy="30" r="2.5" fill="#E8175D"/><circle cx="18" cy="30" r="2.5" fill="#E8175D"/><circle cx="28" cy="30" r="2.5" fill="#E8175D"/><circle cx="38" cy="30" r="2.5" fill="#E8175D"/><circle cx="48" cy="30" r="2.5" fill="#E8175D"/><circle cx="58" cy="30" r="2.5" fill="#E8175D"/>
+<path d="M8 10 Q30 -8 48 30" stroke="#FFC94A" stroke-width="3" fill="none"/>
+</g>
+</svg>

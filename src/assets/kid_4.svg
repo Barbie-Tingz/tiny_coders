@@ -1,0 +1,21 @@
+<svg width="140" height="270" viewBox="0 0 140 270" xmlns="http://www.w3.org/2000/svg">
+<rect x="30" y="10" width="80" height="70" rx="14" fill="#FFE0C4"/>
+<circle cx="55" cy="45" r="6" fill="#1C1C1C"/><circle cx="85" cy="45" r="6" fill="#1C1C1C"/>
+<path d="M55 62 Q70 72 85 62" stroke="#1C1C1C" stroke-width="4" fill="none" stroke-linecap="round"/>
+<path d="M18 8 Q70 -20 122 8 Q126 60 116 90 Q108 55 100 60 L100 15 Q70 0 40 15 L40 60 Q32 55 24 90 Q14 60 18 8 Z" fill="#D4482C"/>
+<circle cx="24" cy="95" r="9" fill="#D4482C"/><circle cx="116" cy="95" r="9" fill="#D4482C"/>
+<path d="M100 8 Q120 0 128 15 Q118 16 108 20 Z" fill="#E8175D"/>
+<circle cx="122" cy="12" r="9" fill="#E8175D"/>
+<rect x="20" y="85" width="100" height="90" rx="16" fill="#FFC94A"/>
+<rect x="0" y="95" width="26" height="65" rx="12" fill="#FFC94A"/><rect x="114" y="95" width="26" height="65" rx="12" fill="#FFC94A"/>
+<rect x="-2" y="150" width="30" height="24" rx="8" fill="#FFE0C4"/><rect x="112" y="150" width="30" height="24" rx="8" fill="#FFE0C4"/>
+<rect x="35" y="175" width="30" height="55" rx="10" fill="#2A2A2A"/><rect x="75" y="175" width="30" height="55" rx="10" fill="#2A2A2A"/>
+<rect x="30" y="225" width="40" height="18" rx="6" fill="#5A5A5A"/><rect x="70" y="225" width="40" height="18" rx="6" fill="#5A5A5A"/>
+<g transform="translate(28,105)">
+<rect x="0" y="0" width="64" height="46" rx="4" fill="#FFFFFF" stroke="#E8175D" stroke-width="4"/>
+<circle cx="8" cy="10" r="2.5" fill="#E8175D"/><circle cx="18" cy="10" r="2.5" fill="#E8175D"/><circle cx="28" cy="10" r="2.5" fill="#E8175D"/><circle cx="38" cy="10" r="2.5" fill="#E8175D"/><circle cx="48" cy="10" r="2.5" fill="#E8175D"/><circle cx="58" cy="10" r="2.5" fill="#E8175D"/>
+<circle cx="8" cy="20" r="2.5" fill="#E8175D"/><circle cx="18" cy="20" r="2.5" fill="#E8175D"/><circle cx="28" cy="20" r="2.5" fill="#E8175D"/><circle cx="38" cy="20" r="2.5" fill="#E8175D"/><circle cx="48" cy="20" r="2.5" fill="#E8175D"/><circle cx="58" cy="20" r="2.5" fill="#E8175D"/>
+<circle cx="8" cy="30" r="2.5" fill="#E8175D"/><circle cx="18" cy="30" r="2.5" fill="#E8175D"/><circle cx="28" cy="30" r="2.5" fill="#E8175D"/><circle cx="38" cy="30" r="2.5" fill="#E8175D"/><circle cx="48" cy="30" r="2.5" fill="#E8175D"/><circle cx="58" cy="30" r="2.5" fill="#E8175D"/>
+<path d="M8 10 Q30 -8 48 30" stroke="#FFC94A" stroke-width="3" fill="none"/>
+</g>
+</svg>

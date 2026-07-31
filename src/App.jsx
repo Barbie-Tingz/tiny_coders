@@ -1,3 +1,4 @@
+import './App.css'
 import AboutPage from './pages/about_page'
 import ContactPage from './pages/contact_page'
 import HomePage from './pages/home_page'

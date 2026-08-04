@@ -1,8 +1,8 @@
 function Footer() {
     return(
-        <div className="footer">
-            <h3>Footer</h3>
-            <p>Tiny Coders LLC</p>
+        <div>
+        {/* FOOTER */}
+        <footer className="tc-footer">TINYCODERS.ORG · WHERE BIG IDEAS START SMALL</footer>
         </div>
     )
 }

@@ -1,5 +1,4 @@
 import './App.css'
-import AboutPage from './pages/about_page'
 import ContactPage from './pages/contact_page'
 import HomePage from './pages/home_page'
 import ClassesPage from './pages/classes_page'
@@ -21,9 +20,9 @@ function App() {
             <Route path="/videos" element={<VideoPage/>}/>
             <Route path="/contact" element={<ContactPage/>}/>
             <Route path="/classes" element={<ClassesPage/>}/>
-            <Route path="/enrollment" element={<ClassesPage/>}/>
             <Route path="/schedule" element={<Schedule/>}/>
             <Route path="/faq" element={<FAQ/>}/>
+            <Route path="/enrollment" element={<EnrollmentPage/>}/>
             <Route path="/privacy" element={<PrivacyPolicy/>}/>
         </Routes>
         <Footer/>

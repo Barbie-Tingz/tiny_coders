@@ -1,7 +1,7 @@
 function EnrollmentPage() {
     return(
         <div>
-            <h1>Enrollment Page</h1>
+            <h1 className="page-title">Enrollment Page</h1>
         </div>
     )
 }

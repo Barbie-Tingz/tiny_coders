@@ -1,7 +1,10 @@
+import Calendar from "./calendar"
+
 function ClassesPage() {
     return(
         <div className="classPage">
-            <h1>Classes Page</h1>
+            <h1 className="page-title">Classes Page</h1>
+            <Calendar></Calendar>
         </div>
     )
 }

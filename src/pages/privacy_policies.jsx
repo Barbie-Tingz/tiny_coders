@@ -1,7 +1,7 @@
 function PrivacyPolicy(){
     return(
         <div>
-            <h1>Privacy Policies</h1>
+            <h1 className="page-title">Privacy Policies</h1>
         </div>
     )
 }

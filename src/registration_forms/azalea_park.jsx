@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
-function Princeton() {
-  const [state, handleSubmit] = useForm("xwleezaj");
+function AzaleaPark() {
+  const [state, handleSubmit] = useForm("");
   if (state.succeeded) {
       return <p>Thanks for joining!</p>;
   }
@@ -45,4 +45,4 @@ function Princeton() {
   );
 }
 
-export default Princeton;
+export default AzaleaPark;

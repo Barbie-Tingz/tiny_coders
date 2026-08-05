@@ -167,7 +167,7 @@
 
 /* ===== HERO ===== */
 .tc-hero-wrap {
-  background: linear-gradient(160deg, var(--blue) 0%, var(--blue-deep) 100%);
+  background: linear-gradient(160deg, var(--blue) 100%, var(--blue-deep) 0%);
   padding: 70px 40px 90px;
   display: flex;
   justify-content: center;
@@ -225,6 +225,9 @@
   font-weight: 700;
   font-size: 14px;
   color: var(--ink);
+  display: flex;
+  align-items: flex-end;
+  padding: 8px 20px 0;
 }
 
 .tc-hero-bar {
@@ -294,7 +297,7 @@
 
 /* ===== FEATURE CARDS ===== */
 .tc-cards-section {
-  background: var(--blue-deep);
+  background: var(--blue);
   padding: 0 40px 90px;
   display: flex;
   justify-content: center;
@@ -405,41 +408,179 @@
   font-size: 15px;
   letter-spacing: 1px;
 }
-/* Video Page */
-.video_page {
-    background-color: var(--cream);
+
+.tc-contact-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
 }
 
-.video_card iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: none;
-    border-radius: 12px;
+.tc-contact-form-card {
+  flex: 1.4;
+  background: var(--cream);
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  padding: 34px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
 }
 
-.video_grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 24px;
-    padding: 40px;
+.tc-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.video_card {
-    padding: 40px;
-    border-radius: 16px;
-    color: var(--ink);
+.tc-form-label {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  margin-top: 14px;
 }
 
-.video_card_one   { background-color: var(--sky-cyan); }
-.video_card_two   { background-color: var(--blue); color: white; }
-.video_card_three { background-color: var(--pink); }
-.video_card_four  { background-color: var(--lavender); color: white; }
+.tc-form-label:first-child {
+  margin-top: 0;
+}
 
-@media (max-width: 480px) {
-    .video_grid {
-        grid-template-columns: 1fr;
-    }
+.tc-form-input {
+  font-family: 'Space Mono', monospace;
+  font-size: 15px;
+  padding: 10px 14px;
+  border: 3px solid var(--ink);
+  border-radius: 30px;
+  background: white;
+  color: var(--ink);
+}
+
+.tc-form-input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+.tc-form-textarea {
+  border-radius: 16px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.tc-form-error {
+  color: var(--pink-deep);
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.tc-form-submit {
+  margin-top: 20px;
+  align-self: flex-start;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--pink);
+  border: 4px solid var(--ink);
+  border-radius: 30px;
+  padding: 12px 30px;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+.tc-form-submit:hover {
+  transform: translate(-2px, -2px);
+}
+
+.tc-form-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tc-contact-people {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tc-contact-card {
+  background: var(--sky-cyan);
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  padding: 24px 28px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.tc-contact-card.accent-pink {
+  background: var(--pink);
+}
+
+.tc-contact-name {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.tc-contact-role {
+  font-family: 'Space Mono', monospace;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--blue-deep);
+  margin: 4px 0 10px;
+}
+
+.tc-contact-info {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .tc-contact-section {
+    flex-direction: column;
+  }
+}
+
+/* ===== VIDEO PAGE ===== */
+.tc-video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.tc-video-card {
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.tc-video-card iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 12px;
+}
+
+.tc-video-card.sky-cyan { background: var(--sky-cyan); }
+.tc-video-card.blue     { background: var(--blue); }
+.tc-video-card.pink     { background: var(--pink); }
+.tc-video-card.lavender { background: var(--lavender); }
+
+@media (max-width: 700px) {
+  .tc-video-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*Bug Dash Game*/
@@ -563,6 +704,71 @@
   color: var(--ink);
   text-align: center;
   padding: 60px 20px;
+}
+
+/* ===== ENROLLMENT PAGE ===== */
+.tc-school-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+}
+
+.tc-school-card {
+  background: var(--cream);
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
+}
+
+.tc-school-card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+  border: none;
+  background: var(--sky-cyan);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.tc-school-card.blue .tc-school-card-header { background: var(--blue); color: white; }
+.tc-school-card.pink .tc-school-card-header { background: var(--pink); }
+.tc-school-card.lavender .tc-school-card-header { background: var(--lavender); }
+
+.tc-school-card.open .tc-school-card-header {
+  border-bottom: 5px solid var(--ink);
+}
+
+.tc-school-toggle {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tc-school-form {
+  padding: 24px;
 }
 
 /* Calendar */

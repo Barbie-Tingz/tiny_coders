@@ -1,10 +1,7 @@
 
 // Add your real dates here. Key = "YYYY-MM-DD", value = short label shown on that day.
 const events = {
-  '2026-08-03': '',
-  '2026-08-15': '',
-  '2026-09-05': '',
-  '2026-09-26': '',
+  '2026-08-03': ''
 };
 
 const monthNames = [
@@ -58,7 +55,7 @@ function MonthGrid({ year, monthIndex }) {
   );
 }
 
-export default function Calendar({ startYear, startMonth, monthsToShow = 10 }) {
+export default function Calendar({ startYear, startMonth, monthsToShow = 3 }) {
   const now = new Date();
   const year = startYear ?? now.getFullYear();
   const month = startMonth ?? now.getMonth();

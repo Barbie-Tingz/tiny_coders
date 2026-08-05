@@ -7,50 +7,56 @@ function ContactForm() {
       return <p>Thanks for joining!</p>;
   }
   return (
-    <form onSubmit={handleSubmit}>
-    <label className="parent_name">
+    <form className="tc-contact-form" onSubmit={handleSubmit}>
+    <label className="tc-form-label" htmlFor="parent_name">
         Parent Name
     </label>
     <input
+        className="tc-form-input"
         id="parent_name"
         type="text"
         name="name"
     />
-    <label className="child_name">
-        Child Name 
+    <label className="tc-form-label" htmlFor="child_name">
+        Child Name
     </label>
     <input
+        className="tc-form-input"
         id="child_name"
         type="text"
-        name="name"
+        name="child_name"
     />
-    <label className="email_address">
+    <label className="tc-form-label" htmlFor="email_address">
         Email Address
     </label>
     <input
+        className="tc-form-input"
         id="email_address"
-        type="email" 
+        type="email"
         name="email"
     />
-    <label className="message">
-        Message
-    </label>
-    <input
-        id="message"
-        type="text"
-        name="name"
-    />
-    <ValidationError 
-        prefix="Email" 
+    <ValidationError
+        className="tc-form-error"
+        prefix="Email"
         field="email"
         errors={state.errors}
     />
-    <ValidationError 
-        prefix="Message" 
+    <label className="tc-form-label" htmlFor="message">
+        Message
+    </label>
+    <textarea
+        className="tc-form-input tc-form-textarea"
+        id="message"
+        name="message"
+        rows="4"
+    />
+    <ValidationError
+        className="tc-form-error"
+        prefix="Message"
         field="message"
         errors={state.errors}
     />
-    <button type="submit" disabled={state.submitting}>
+    <button className="tc-form-submit" type="submit" disabled={state.submitting}>
         Submit Form
     </button>
     </form>

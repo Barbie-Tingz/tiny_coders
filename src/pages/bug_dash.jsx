@@ -8,11 +8,11 @@ const codeLines = [
 ]
 
 const colors = {
-  pink: '#E8175D',
-  blue: '#5FA8E8',
+  pink: '#F273C4',
+  blue: '#4A5CF0',
   orange: '#E8432C',
   yellow: '#FFC94A',
-  dark: '#1A1A1A',
+  dark: '#1B1B45',
 };
 
 export default function BugDash() {

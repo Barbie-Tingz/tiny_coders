@@ -1,6 +1,6 @@
 function PrivacyPolicy(){
     return(
-        <div>
+        <div className="tc-page">
             <h1 className="page-title">Privacy Policies</h1>
         </div>
     )

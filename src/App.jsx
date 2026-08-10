@@ -5,7 +5,6 @@ import ClassesPage from './pages/classes_page'
 import EnrollmentPage from './pages/enrollment'
 import Schedule from './pages/schedule'
 import PrivacyPolicy from './pages/privacy_policies'
-import FAQ from './pages/FAQ'
 import VideoPage from './pages/video_page'
 import Navbar from './shared_components/navbar'
 import Footer from './shared_components/footer'
@@ -21,7 +20,6 @@ function App() {
             <Route path="/contact" element={<ContactPage/>}/>
             <Route path="/classes" element={<ClassesPage/>}/>
             <Route path="/schedule" element={<Schedule/>}/>
-            <Route path="/faq" element={<FAQ/>}/>
             <Route path="/enrollment" element={<EnrollmentPage/>}/>
             <Route path="/privacy" element={<PrivacyPolicy/>}/>
         </Routes>

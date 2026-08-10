@@ -1,6 +1,6 @@
 function Schedule() {
     return(
-        <div>
+        <div className="tc-page">
             <h1 className="page-title">Schedule</h1>
         </div>
     )

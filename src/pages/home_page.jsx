@@ -1,6 +1,7 @@
 import monitor from '../assets/monitor.svg'
 import arduino from '../assets/arduino.svg'
 import breadboard from '../assets/breadboard.svg'
+import BugDash from '../pages/bug_dash.jsx'
 
 export default function HomePage() {
   return (
@@ -45,7 +46,6 @@ export default function HomePage() {
             <div key={i} className="tc-fcard">
                 <img src={card.icon} alt=""/>
               <div className="tc-fcard-title">{card.title}</div>
-              <a href="#" className="tc-fcard-link">More Details →</a>
             </div>
           ))}
         </div>
@@ -61,6 +61,7 @@ export default function HomePage() {
           nobody starts at the end.
         </div>
       </div>
+      <BugDash className= "bugdash-home"></BugDash>
     </div>
   );
 }

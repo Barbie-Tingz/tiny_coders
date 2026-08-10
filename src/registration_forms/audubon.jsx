@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
-function Audobon() {
+function Audubon() {
   const [state, handleSubmit] = useForm("mnjeklrn");
   if (state.succeeded) {
       return <p>Thanks for joining!</p>;
@@ -45,4 +45,4 @@ function Audobon() {
   );
 }
 
-export default Audobon;
+export default Audubon;

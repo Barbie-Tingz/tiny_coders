@@ -1,6 +1,6 @@
-import monitor from '../assets/monitor.svg'
-import arduino from '../assets/arduino.svg'
-import breadboard from '../assets/breadboard.svg'
+import monitor from '../assets/rasp_pi.jpg'
+import arduino from '../assets/arduino.jpg'
+import breadboard from '../assets/rasp_pi_2.jpg'
 import BugDash from '../pages/bug_dash.jsx'
 
 export default function HomePage() {
@@ -44,7 +44,7 @@ export default function HomePage() {
             { icon: arduino, title: "Create Your Own Mini Computer" },
           ].map((card, i) => (
             <div key={i} className="tc-fcard">
-                <img src={card.icon} alt=""/>
+                <img className="tc-fcard-icon" src={card.icon} alt=""/>
               <div className="tc-fcard-title">{card.title}</div>
             </div>
           ))}

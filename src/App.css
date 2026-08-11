@@ -286,8 +286,8 @@
 }
 
 .tc-fcard-icon {
-  width: 80px;
-  height: 80px;
+  width: 200px;
+  height: 200px;
   margin: 0 auto 20px;
   border: 4px solid var(--ink);
   border-radius: 16px;
@@ -295,6 +295,13 @@
   align-items: center;
   justify-content: center;
   font-size: 34px;
+  overflow: hidden;
+}
+
+.tc-fcard-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .tc-fcard-icon.lavender { background: var(--lavender); }

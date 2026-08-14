@@ -1,7 +1,7 @@
 import RegistrationForm from './registration_form';
 
-function Audubon() {
-  return <RegistrationForm formId="mnjeklrn" schoolName="Audubon" />;
+function AudubonPark() {
+  return <RegistrationForm formId="mnjeklrn" schoolName="Audubon Park" />;
 }
 
-export default Audubon;
+export default AudubonPark;

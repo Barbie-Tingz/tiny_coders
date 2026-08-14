@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Audubon from "../registration_forms/audubon.jsx"
+import AudubonPark from "../registration_forms/audubon.jsx"
 import Avalon from "../registration_forms/avalon.jsx"
 import AzaleaPark from "../registration_forms/azalea_park.jsx"
 import BaldwinPark from "../registration_forms/baldwin_park.jsx"
@@ -7,7 +7,7 @@ import Hillcrest from "../registration_forms/hillcrest.jsx"
 import Princeton from "../registration_forms/princeton.jsx"
 
 const schools = [
-    { key: "audubon", name: "Audubon", accent: "sky-cyan", Form: Audubon },
+    { key: "audubon-park", name: "Audubon Park", accent: "sky-cyan", Form: AudubonPark },
     { key: "avalon", name: "Avalon", accent: "blue", Form: Avalon },
     { key: "azalea-park", name: "Azalea Park", accent: "pink", Form: AzaleaPark },
     { key: "baldwin-park", name: "Baldwin Park", accent: "lavender", Form: BaldwinPark },

@@ -520,6 +520,79 @@
   cursor: not-allowed;
 }
 
+.tc-form-success {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--ink);
+  text-align: center;
+  padding: 20px 0;
+}
+
+.tc-form-section {
+  border: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-form-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.tc-form-section-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--blue-deep);
+  border-bottom: 3px solid var(--sky-cyan);
+  padding: 0 0 6px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.tc-form-note {
+  font-family: 'Space Mono', monospace;
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  margin: 2px 0 8px;
+}
+
+.tc-form-select {
+  border-radius: 12px;
+  appearance: auto;
+  cursor: pointer;
+}
+
+.tc-form-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.tc-form-checkbox-row input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--blue);
+  cursor: pointer;
+}
+
+.tc-form-link {
+  color: var(--blue-deep);
+  text-decoration: underline;
+}
+
 .tc-contact-people {
   flex: 1;
   display: flex;
@@ -732,6 +805,64 @@
   padding: 90px 20px 50px;
 }
 
+/* ===== PRIVACY POLICY PAGE ===== */
+.tc-policy-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 40px 100px;
+  text-align: left;
+  font-family: 'Space Mono', monospace;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.tc-policy-updated {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.tc-policy-intro {
+  font-size: 15px;
+  margin-bottom: 36px;
+}
+
+.tc-policy-section {
+  margin-bottom: 32px;
+}
+
+.tc-policy-heading {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--blue-deep);
+  border-bottom: 3px solid var(--sky-cyan);
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.tc-policy-section p {
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+
+.tc-policy-list {
+  margin: 0 0 10px;
+  padding-left: 22px;
+}
+
+.tc-policy-list li {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+  .tc-policy-wrap {
+    padding: 0 20px 60px;
+  }
+}
+
 /* ===== ENROLLMENT PAGE ===== */
 .tc-school-grid {
   display: grid;
@@ -772,8 +903,8 @@
 .tc-school-card.pink .tc-school-card-header { background: var(--pink); }
 .tc-school-card.lavender .tc-school-card-header { background: var(--lavender); }
 
-.tc-school-card.open .tc-school-card-header {
-  border-bottom: 5px solid var(--ink);
+.tc-school-card-header:hover {
+  filter: brightness(0.96);
 }
 
 .tc-school-toggle {
@@ -793,8 +924,85 @@
   justify-content: center;
 }
 
-.tc-school-form {
+.tc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 27, 69, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
+  z-index: 100;
+}
+
+.tc-modal-panel {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  border: 5px solid var(--ink);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.tc-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--sky-cyan);
+  border-bottom: 5px solid var(--ink);
+}
+
+.tc-modal-title {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.tc-modal-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.tc-modal-close:hover {
+  background: var(--pink);
+}
+
+.tc-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+  .tc-modal-overlay {
+    padding: 0;
+  }
+
+  .tc-modal-panel {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
 }
 
 @media (max-width: 640px) {

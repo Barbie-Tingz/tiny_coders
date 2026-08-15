@@ -728,6 +728,15 @@
   color: var(--ink);
 }
 
+.bugdash-highscore {
+  position: absolute;
+  top: 34px;
+  right: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
 .bugdash-hint {
   position: absolute;
   top: 10px;
@@ -769,6 +778,13 @@
 .bugdash-overscore {
   color: var(--ink-soft);
   margin-top: 6px;
+}
+
+.bugdash-newhigh {
+  color: var(--pink-deep);
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 8px;
 }
 
 .bugdash-restart {

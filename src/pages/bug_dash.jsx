@@ -15,13 +15,28 @@ const colors = {
   dark: '#1B1B45',
 };
 
+const HIGH_SCORE_KEY = 'bugdash-highscore';
+
 export default function BugDash() {
   const canvasRef = useRef(null);
+  const highScoreRef = useRef(0);
   const [displayScore, setDisplayScore] = useState(0);
   const [buildingText, setBuildingText] = useState('Building: _');
   const [gameOver, setGameOver] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [isNewHighScore, setIsNewHighScore] = useState(false);
   const [resetKey, setResetKey] = useState(0);
+
+  useEffect(() => {
+    try {
+      const saved = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
+      highScoreRef.current = saved;
+      setHighScore(saved);
+    } catch {
+      // localStorage unavailable — high score just won't persist
+    }
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,6 +69,7 @@ export default function BugDash() {
       lineIndex = 0;
       tokenIndex = 0;
       setGameOver(false);
+      setIsNewHighScore(false);
       updateBuildingText();
     };
 
@@ -176,7 +192,18 @@ export default function BugDash() {
           player.y < o.y + o.h - 4
         ) {
           running = false;
-          setFinalScore(Math.floor(score));
+          const finalScoreValue = Math.floor(score);
+          setFinalScore(finalScoreValue);
+          if (finalScoreValue > highScoreRef.current) {
+            highScoreRef.current = finalScoreValue;
+            setHighScore(finalScoreValue);
+            setIsNewHighScore(true);
+            try {
+              localStorage.setItem(HIGH_SCORE_KEY, String(finalScoreValue));
+            } catch {
+              // localStorage unavailable — high score just won't persist
+            }
+          }
           setGameOver(true);
         }
       }
@@ -240,17 +267,20 @@ export default function BugDash() {
 
   return (
     <div className="bugdash-wrap">
-      <h2 className="bugdash-heading">Bug Dash</h2>
-      <p className="bugdash-sub">Jump to grab the next piece of code in order — dodge the bugs along the way</p>
+      <h2 className="bugdash-heading">Tiny Tumble</h2>
+      <p className="bugdash-sub"></p>
       <div className="bugdash-game">
         <canvas ref={canvasRef} width={600} height={220} />
         <div className="bugdash-score">{displayScore}</div>
+        <div className="bugdash-highscore">Best: {highScore}</div>
         <div className="bugdash-hint">SPACE to jump</div>
         <div className="bugdash-codeline">{buildingText}</div>
         {gameOver && (
           <div className="bugdash-overlay">
             <div className="bugdash-overtitle">Game over</div>
             <div className="bugdash-overscore">Score: {finalScore}</div>
+            <div className="bugdash-overscore">Best: {highScore}</div>
+            {isNewHighScore && <div className="bugdash-newhigh">New high score!</div>}
             <button className="bugdash-restart" onClick={() => setResetKey((k) => k + 1)}>
               Play again
             </button>

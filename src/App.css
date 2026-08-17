@@ -134,7 +134,7 @@
 
 /* ===== HERO ===== */
 .tc-hero-wrap {
-  background: linear-gradient(160deg, var(--blue) 0%, var(--cream) 100%);
+  background: var(--cream);
   padding: 70px 40px 90px;
   display: flex;
   justify-content: center;

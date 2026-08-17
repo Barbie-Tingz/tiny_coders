@@ -39,6 +39,14 @@ function EnrollmentPage() {
                 <div className="finger-paint font-md">Enrollment</div>
             </div>
 
+            <div className="tc-enrollment-info-wrap">
+                <div className="tc-enrollment-info">
+                    <p>Tiny Coders sessions take place onsite at your school, on the day your school selects (see the registration form for details).</p>         
+                    <p>Hours of operation are 3:00 PM – 4:30 PM.</p>
+                    <p>All laptops and supplies are provided by Tiny Coders.</p>
+                </div>
+            </div>
+
             <div className="tc-school-grid">
                 {schools.map(({ key, name, accent }) => (
                     <div key={key} className={`tc-school-card ${accent}`}>

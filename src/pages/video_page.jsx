@@ -10,7 +10,21 @@ function VideoPage() {
         <div className="tc-page">
             <div className="tc-page-hero">
                 <div className="tc-unique-eyebrow">SEE US IN ACTION</div>
-                <div className="finger-paint font-md">Coming Soon</div>
+            </div>
+
+            <div className="tc-unique-section tc-unique-section-tight">
+                <div className="tc-play-info">
+                    <div className="finger-paint font-md">Learning Through the Power of Play</div>
+                    <div className="tc-unique-body">
+                        At Tiny Coders, we believe kids learn best when they're having fun. That's why every lesson is
+                        built around games — designing them, coding them, and even building the tech that powers them.
+                        Along the way, kids pick up real skills in programming and electronics, all while doing
+                        something they love.
+                    </div>
+                    <div className="tc-unique-body">
+                        Take a peek at some of the exciting projects and activities our students dive into in class.
+                    </div>
+                </div>
             </div>
 
             <div className="tc-video-section">

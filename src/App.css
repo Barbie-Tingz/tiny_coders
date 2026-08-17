@@ -840,8 +840,15 @@
 
 .tinytumble-heading {
   color: var(--pink-deep);
-  font-size: 60px;
+  font-size: clamp(1.75rem, 1rem + 4vw, 3.75rem);
   margin-bottom: 6px;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .tinytumble-wrap {
+    padding: 10px;
+  }
 }
 
 .tinytumble-sub {
@@ -857,13 +864,25 @@
   border: 3px solid var(--ink);
   border-radius: 12px;
   overflow: hidden;
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
 }
 
 .tinytumble-game canvas {
   display: block;
   background: var(--cream);
-  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .tinytumble-game {
+    aspect-ratio: 2 / 1;
+  }
+
+  .tinytumble-game canvas {
+    height: 100%;
+  }
 }
 
 .tinytumble-score {

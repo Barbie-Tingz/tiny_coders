@@ -625,6 +625,13 @@
   color: var(--ink);
 }
 
+.tc-form-day {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+
 .tc-form-price {
   font-family: 'Baloo 2', sans-serif;
   font-weight: 800;

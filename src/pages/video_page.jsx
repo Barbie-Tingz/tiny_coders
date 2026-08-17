@@ -10,7 +10,7 @@ function VideoPage() {
         <div className="tc-page">
             <div className="tc-page-hero">
                 <div className="tc-unique-eyebrow">SEE US IN ACTION</div>
-                <div className="finger-paint font-md">Videos</div>
+                <div className="finger-paint font-md">Coming Soon</div>
             </div>
 
             <div className="tc-video-section">

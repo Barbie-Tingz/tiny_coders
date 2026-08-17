@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
-function RegistrationForm({ formId, schoolName }) {
+function RegistrationForm({ formId, schoolName, day }) {
   const [state, handleSubmit] = useForm(formId);
   const [sameAsParent, setSameAsParent] = useState(false);
   const [extendedDay, setExtendedDay] = useState(false);
@@ -18,7 +18,12 @@ function RegistrationForm({ formId, schoolName }) {
     <form className="tc-contact-form" onSubmit={handleSubmit}>
 
       <div className="tc-form-intro">
-        {schoolName && <div className="tc-form-school-name">{schoolName}</div>}
+        {schoolName && (
+          <div className="tc-form-school-name">
+            {schoolName}
+            {day && <span className="tc-form-day"> ({day})</span>}
+          </div>
+        )}
         <div className="tc-form-price">$99.95/month</div>
         <div className="tc-form-tagline">Monthly program. No contracts.</div>
       </div>

@@ -19,12 +19,6 @@ return(
                 <p className="tc-contact-role">Company Owner</p>
                 <p className="tc-contact-info">Email: tinycoders@tinycoders.org</p>
             </div>
-
-            <div className="tc-contact-card accent-pink">
-                <h3 className="tc-contact-name">Alex Serna</h3>
-                <p className="tc-contact-role">Company Coordinator</p>
-                <p className="tc-contact-info">Email: tinycoders@tinycoders.org</p>
-            </div>
         </div>
     </div>
 </div>

@@ -48,7 +48,7 @@ export default function TinyTumble() {
     const groundY = 170;
 
     let player, bugs, tokens, speed, score, isJumping, velocityY, gravity, running;
-    let bugTimer, tokenTimer, lineIndex, tokenIndex, animationId;
+    let bugTimer, tokenTimer, lineIndex, tokenIndex, animationId, frameCount;
 
     const currentLine = () => codeLines[lineIndex % codeLines.length];
 
@@ -72,6 +72,7 @@ export default function TinyTumble() {
       tokenTimer = 40;
       lineIndex = 0;
       tokenIndex = 0;
+      frameCount = 0;
       setGameOver(false);
       setIsNewHighScore(false);
       updateBuildingText();
@@ -135,7 +136,7 @@ export default function TinyTumble() {
       ctx.roundRect(o.x, o.y, o.w, o.h, 6);
       ctx.fill();
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 13px monospace';
+      ctx.font = 'bold 15px monospace';
       ctx.textAlign = 'center';
       ctx.fillText(o.text, o.x + o.w / 2, o.y + o.h / 2 + 4);
     };
@@ -143,7 +144,7 @@ export default function TinyTumble() {
     const spawnToken = () => {
       const line = currentLine();
       const text = line[tokenIndex];
-      const w = Math.max(34, text.length * 10 + 12);
+      const w = Math.max(38, text.length * 12 + 14);
       tokens.push({ x: canvas.width, y: groundY - 100, w, h: 26, text });
     };
 
@@ -234,7 +235,10 @@ export default function TinyTumble() {
 
       score += 0.15;
       speed += 0.0012;
-      setDisplayScore(Math.floor(score));
+      frameCount++;
+      if (frameCount % 6 === 0) {
+        setDisplayScore(Math.floor(score));
+      }
     };
 
     const draw = () => {

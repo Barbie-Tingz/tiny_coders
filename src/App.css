@@ -865,7 +865,7 @@
   border-radius: 12px;
   overflow: hidden;
   width: 100%;
-  max-width: 600px;
+  max-width: 720px;
 }
 
 .tinytumble-game canvas {
@@ -875,20 +875,11 @@
   height: auto;
 }
 
-@media (max-width: 640px) {
-  .tinytumble-game {
-    aspect-ratio: 2 / 1;
-  }
-
-  .tinytumble-game canvas {
-    height: 100%;
-  }
-}
 
 .tinytumble-score {
   position: absolute;
-  top: 10px;
-  right: 16px;
+  top: 5%;
+  right: 3%;
   font-size: 18px;
   font-weight: bold;
   color: var(--ink);
@@ -904,23 +895,41 @@
 
 .tinytumble-hint {
   position: absolute;
-  top: 10px;
-  left: 16px;
+  top: 5%;
+  left: 3%;
   font-size: 13px;
   color: var(--ink-soft);
 }
 
 .tinytumble-codeline {
   position: absolute;
-  bottom: 8px;
-  left: 16px;
-  right: 16px;
+  bottom: 3%;
+  left: 3%;
+  right: 3%;
   font-family: 'Space Mono', monospace;
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.1;
   color: var(--ink);
   background: rgba(255,255,255,0.85);
-  padding: 4px 10px;
+  padding: 2px 8px;
   border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .tinytumble-codeline {
+    font-size: 16px;
+    line-height: 1.1;
+    padding: 2px 6px;
+    bottom: 2.5%;
+  }
+
+  .tinytumble-score {
+    font-size: 13px;
+  }
+
+  .tinytumble-hint {
+    font-size: 9px;
+  }
 }
 
 .tinytumble-overlay {

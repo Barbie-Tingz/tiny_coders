@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 
 function RegistrationForm({ formId, schoolName }) {
   const [state, handleSubmit] = useForm(formId);
+  const [sameAsParent, setSameAsParent] = useState(false);
+  const [extendedDay, setExtendedDay] = useState(false);
 
   if (state.succeeded) {
     return (
@@ -14,14 +17,17 @@ function RegistrationForm({ formId, schoolName }) {
   return (
     <form className="tc-contact-form" onSubmit={handleSubmit}>
 
+      <div className="tc-form-intro">
+        {schoolName && <div className="tc-form-school-name">{schoolName}</div>}
+        <div className="tc-form-price">$99.95/month</div>
+        <div className="tc-form-tagline">Monthly program. No contracts.</div>
+      </div>
+
       <fieldset className="tc-form-section">
         <legend className="tc-form-section-title">Child Information</legend>
 
         <label className="tc-form-label" htmlFor="child_full_name">Full Legal Name</label>
         <input className="tc-form-input" id="child_full_name" type="text" name="child_full_name" required />
-
-        <label className="tc-form-label" htmlFor="child_dob">Date of Birth</label>
-        <input className="tc-form-input" id="child_dob" type="date" name="child_dob" required />
 
         <label className="tc-form-label" htmlFor="child_grade">Grade</label>
         <select className="tc-form-input tc-form-select" id="child_grade" name="child_grade" required defaultValue="">
@@ -29,6 +35,18 @@ function RegistrationForm({ formId, schoolName }) {
           <option value="4th">4th</option>
           <option value="5th">5th</option>
         </select>
+
+        <label className="tc-form-label" htmlFor="child_teacher">Teacher Name</label>
+        <input className="tc-form-input" id="child_teacher" type="text" name="child_teacher" required />
+
+        <label className="tc-form-label" htmlFor="medications">Medications the Child May Need During Class</label>
+        <textarea
+          className="tc-form-input tc-form-textarea"
+          id="medications"
+          name="medications"
+          rows="2"
+          placeholder="Include administration instructions, if any"
+        />
       </fieldset>
 
       <fieldset className="tc-form-section">
@@ -52,21 +70,7 @@ function RegistrationForm({ formId, schoolName }) {
       </fieldset>
 
       <fieldset className="tc-form-section">
-        <legend className="tc-form-section-title">Emergency Contact</legend>
-        <p className="tc-form-note">If different from the parent/guardian above.</p>
-
-        <label className="tc-form-label" htmlFor="emergency_name">Name</label>
-        <input className="tc-form-input" id="emergency_name" type="text" name="emergency_name" />
-
-        <label className="tc-form-label" htmlFor="emergency_relationship">Relationship to Child</label>
-        <input className="tc-form-input" id="emergency_relationship" type="text" name="emergency_relationship" />
-
-        <label className="tc-form-label" htmlFor="emergency_phone">Phone Number</label>
-        <input className="tc-form-input" id="emergency_phone" type="tel" name="emergency_phone" />
-      </fieldset>
-
-      <fieldset className="tc-form-section">
-        <legend className="tc-form-section-title">Authorized Pickup</legend>
+        <legend className="tc-form-section-title">Dismissal</legend>
 
         <label className="tc-form-label" htmlFor="authorized_pickup">Names of Anyone Else Authorized to Pick Up the Child</label>
         <textarea className="tc-form-input tc-form-textarea" id="authorized_pickup" name="authorized_pickup" rows="3" />
@@ -75,6 +79,54 @@ function RegistrationForm({ formId, schoolName }) {
           For your child's safety, we cannot release them to anyone not listed above or on file. If someone
           unauthorized arrives for pickup, we will contact the parent/guardian before releasing the child.
         </p>
+
+        <label className="tc-form-checkbox-row" htmlFor="extended_day">
+          <input
+            type="checkbox"
+            id="extended_day"
+            name="extended_day"
+            value="Yes"
+            checked={extendedDay}
+            onChange={(e) => setExtendedDay(e.target.checked)}
+          />
+          Child will be dismissed to an Extended Day Program
+        </label>
+
+        <div className={`tc-form-subgroup${extendedDay ? '' : ' tc-form-section-disabled'}`}>
+          <label className="tc-form-label" htmlFor="extended_day_details">Extended Day Program Name / Instructions</label>
+          <input
+            className="tc-form-input"
+            id="extended_day_details"
+            type="text"
+            name="extended_day_details"
+            disabled={!extendedDay}
+          />
+        </div>
+      </fieldset>
+
+      <fieldset className="tc-form-section">
+        <legend className="tc-form-section-title">Emergency Contact</legend>
+
+        <label className="tc-form-checkbox-row" htmlFor="emergency_same_as_parent">
+          <input
+            type="checkbox"
+            id="emergency_same_as_parent"
+            checked={sameAsParent}
+            onChange={(e) => setSameAsParent(e.target.checked)}
+          />
+          Same as Parent/Guardian above
+        </label>
+
+        <div className={`tc-form-subgroup${sameAsParent ? ' tc-form-section-disabled' : ''}`}>
+          <label className="tc-form-label" htmlFor="emergency_name">Name</label>
+          <input className="tc-form-input" id="emergency_name" type="text" name="emergency_name" disabled={sameAsParent} />
+
+          <label className="tc-form-label" htmlFor="emergency_relationship">Relationship to Child</label>
+          <input className="tc-form-input" id="emergency_relationship" type="text" name="emergency_relationship" disabled={sameAsParent} />
+
+          <label className="tc-form-label" htmlFor="emergency_phone">Phone Number</label>
+          <input className="tc-form-input" id="emergency_phone" type="tel" name="emergency_phone" disabled={sameAsParent} />
+        </div>
       </fieldset>
 
       <fieldset className="tc-form-section">
@@ -85,27 +137,10 @@ function RegistrationForm({ formId, schoolName }) {
 
         <label className="tc-form-label" htmlFor="medical_conditions">Medical Conditions the Instructor Should Know About</label>
         <textarea className="tc-form-input tc-form-textarea" id="medical_conditions" name="medical_conditions" rows="2" />
-
-        <label className="tc-form-label" htmlFor="medications">Medications the Child May Need During Class</label>
-        <textarea
-          className="tc-form-input tc-form-textarea"
-          id="medications"
-          name="medications"
-          rows="2"
-          placeholder="Include administration instructions, if any"
-        />
       </fieldset>
 
       <fieldset className="tc-form-section">
         <legend className="tc-form-section-title">Communication Preferences</legend>
-
-        <label className="tc-form-label" htmlFor="contact_method">Preferred Contact Method</label>
-        <select className="tc-form-input tc-form-select" id="contact_method" name="contact_method" required defaultValue="">
-          <option value="" disabled>Select a method</option>
-          <option value="Email">Email</option>
-          <option value="Text">Text</option>
-          <option value="Call">Call</option>
-        </select>
 
         <label className="tc-form-checkbox-row" htmlFor="newsletter_optin">
           <input type="checkbox" id="newsletter_optin" name="newsletter_optin" value="Yes" />
@@ -130,6 +165,17 @@ function RegistrationForm({ formId, schoolName }) {
           <input type="checkbox" id="privacy_policy_ack" name="privacy_policy_ack" value="Yes" required />
           I have read and agree to the <a className="tc-form-link" href="/privacy" target="_blank" rel="noreferrer">Privacy Policy</a>
         </label>
+      </fieldset>
+
+      <fieldset className="tc-form-section">
+        <legend className="tc-form-section-title">Payment</legend>
+        <p className="tc-form-note">Tuition is $99.95/month, billed monthly with no long-term contract.</p>
+
+        <label className="tc-form-label" htmlFor="payment_method">Preferred Payment Method</label>
+        <select className="tc-form-input tc-form-select" id="payment_method" name="payment_method" required defaultValue="">
+          <option value="" disabled>Select a method</option>
+          <option value="Card">Credit Card</option>
+        </select>
       </fieldset>
 
       <button className="tc-form-submit" type="submit" disabled={state.submitting}>

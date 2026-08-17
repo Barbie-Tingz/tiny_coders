@@ -1,9 +1,30 @@
-import monitor from '../assets/rasp_pi.jpg'
-import arduino from '../assets/arduino.jpg'
-import breadboard from '../assets/rasp_pi_2.jpg'
-import BugDash from '../pages/bug_dash.jsx'
+import { useState } from 'react'
+import computer from '../assets/computer.png'
+import alien from '../assets/alien_sprite.png'
+import pygame from '../assets/pygame.png'
+import TinyTumble from '../pages/tiny_tumble.jsx'
+
+const featureCards = [
+  {
+    icon: pygame,
+    title: "Programming Games in Python Language",
+    description: "Kids learn real coding fundamentals by building their own games in Python, turning lines of code into playable creations from day one.",
+  },
+  {
+    icon: alien,
+    title: "Designing Video Game Characters",
+    description: "Students bring their imagination to life by designing and customizing their own video game characters, blending art and logic in a way that's uniquely their own.",
+  },
+  {
+    icon: computer,
+    title: "Take-Home Mini Computer",
+    description: "Every student leaves with a take-home mini computer, so the learning doesn't stop when class ends — they can keep building and exploring at home.",
+  },
+]
 
 export default function HomePage() {
+  const [selectedCard, setSelectedCard] = useState(null)
+
   return (
     <div className="tc-page">
 
@@ -38,20 +59,45 @@ export default function HomePage() {
       {/* FEATURE CARDS */}
       <div className="tc-cards-section">
         <div className="tc-cards">
-          {[
-            { icon: breadboard, title: "Electronics & Wiring Breadboards" },
-            { icon: monitor, title: "Creating Games in Python" },
-            { icon: arduino, title: "Create Your Own Mini Computer" },
-          ].map((card, i) => (
-            <div key={i} className="tc-fcard">
-                <img className="tc-fcard-icon" src={card.icon} alt=""/>
-              <div className="tc-fcard-title">{card.title}</div>
+          {featureCards.map((card, i) => (
+            <div key={i} className="tc-window tc-fcard-window">
+              <div className="tc-window-main">
+                <div className="tc-window-titlebar">
+                  <span className="tc-window-dot"></span>
+                  <span className="tc-window-dot"></span>
+                  <span className="tc-window-dot"></span>
+                </div>
+                <button className="tc-window-body tc-fcard-btn" onClick={() => setSelectedCard(card)}>
+                  <img className="tc-fcard-icon" src={card.icon} alt=""/>
+                  <div className="tc-fcard-title">{card.title}</div>
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* UNIQUE SECTION */}
+      {selectedCard && (
+        <div className="tc-modal-overlay" onClick={() => setSelectedCard(null)}>
+          <div className="tc-modal-panel tc-modal-panel-sm" onClick={(e) => e.stopPropagation()}>
+            <div className="tc-modal-header">
+              <span className="tc-modal-title">{selectedCard.title}</span>
+              <button
+                className="tc-modal-close"
+                onClick={() => setSelectedCard(null)}
+                aria-label="Close"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="tc-modal-body">
+              <p className="tc-fcard-modal-desc">{selectedCard.description}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* UNIQUE SECTION
       <div className="tc-unique-section">
         <div className="tc-unique-eyebrow">OUR PHILOSOPHY</div>
         <div className="finger-paint font-md">What Makes Tiny Coders Unique?</div>
@@ -61,7 +107,8 @@ export default function HomePage() {
           nobody starts at the end.
         </div>
       </div>
-      <BugDash className= "bugdash-home"></BugDash>
+      */}
+      <TinyTumble className="tinytumble-home"></TinyTumble>
     </div>
   );
 }

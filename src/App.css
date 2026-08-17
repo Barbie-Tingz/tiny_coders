@@ -262,7 +262,7 @@
 /* ===== FEATURE CARDS ===== */
 .tc-cards-section {
   background: var(--blue);
-  padding: 0 40px 90px;
+  padding: 70px 40px 90px;
   display: flex;
   justify-content: center;
 }
@@ -270,19 +270,135 @@
 .tc-cards {
   display: flex;
   gap: 30px;
-  max-width: 1300px;
-  margin-top: -50px;
   width: 100%;
+  max-width: 1300px;
 }
 
-.tc-fcard {
-  flex: 1;
-  background: var(--cream);
+/* ===== WINDOW FRAME (dots + decorative scrollbar) ===== */
+.tc-window {
+  display: flex;
+  width: 100%;
   border: 5px solid var(--ink);
   border-radius: 20px;
-  padding: 34px 24px 30px;
-  text-align: center;
+  overflow: hidden;
+  background: var(--cream);
   box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
+  transition: transform 0.12s ease;
+}
+
+.tc-fcard-window {
+  flex: 1;
+}
+
+.tc-fcard-window:hover {
+  transform: translate(-2px, -2px);
+}
+
+.tc-fcard-btn {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tc-window.sky-cyan .tc-window-titlebar { background: var(--sky-cyan); }
+.tc-window.blue     .tc-window-titlebar { background: var(--blue); }
+.tc-window.pink     .tc-window-titlebar { background: var(--pink); }
+.tc-window.lavender .tc-window-titlebar { background: var(--lavender); }
+
+.tc-video-window-body {
+  padding: 16px;
+}
+
+.tc-video-window-body iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  border-radius: 12px;
+}
+
+.tc-window-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-window-titlebar {
+  background: var(--pink);
+  border-bottom: 5px solid var(--ink);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tc-window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 2px solid var(--ink);
+}
+
+.tc-window-body {
+  flex: 1;
+  padding: 30px;
+}
+
+.tc-window-scrollbar {
+  width: 30px;
+  flex-shrink: 0;
+  background: var(--blue);
+  border-left: 5px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tc-window-scroll-btn {
+  width: 100%;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  line-height: 1;
+  color: var(--cream);
+}
+
+.tc-window-scroll-btn.up {
+  border-bottom: 3px solid var(--ink);
+}
+
+.tc-window-scroll-btn.down {
+  border-top: 3px solid var(--ink);
+  margin-top: auto;
+}
+
+.tc-window-scroll-track {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 12px 0;
+}
+
+.tc-window-scroll-thumb {
+  width: 14px;
+  height: 60px;
+  background: var(--lavender);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+}
+
+@media (max-width: 480px) {
+  .tc-window-scrollbar {
+    display: none;
+  }
 }
 
 .tc-fcard-icon {
@@ -346,7 +462,7 @@
   font-size: 16px;
   color: var(--ink);
   transform: rotate(-2deg);
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .tc-unique-title {
@@ -495,6 +611,36 @@
   margin-top: 4px;
 }
 
+.tc-form-intro {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--sky-cyan);
+}
+
+.tc-form-school-name {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--ink);
+}
+
+.tc-form-price {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--blue-deep);
+  margin-top: 4px;
+}
+
+.tc-form-tagline {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
+
 .tc-form-submit {
   margin-top: 20px;
   align-self: flex-start;
@@ -588,6 +734,20 @@
   cursor: pointer;
 }
 
+.tc-form-subgroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-form-section-disabled {
+  opacity: 0.45;
+}
+
+.tc-form-section-disabled .tc-form-input {
+  background: var(--sky-cyan);
+  cursor: not-allowed;
+}
+
 .tc-form-link {
   color: var(--blue-deep);
   text-decoration: underline;
@@ -646,44 +806,31 @@
 }
 
 /* ===== VIDEO PAGE ===== */
+.tc-video-section {
+  display: flex;
+  justify-content: center;
+  padding: 0 40px 100px;
+}
+
 .tc-video-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 40px 100px;
-}
-
-.tc-video-card {
-  border: 5px solid var(--ink);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
-}
-
-.tc-video-card iframe {
-  display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  border: none;
-  border-radius: 12px;
 }
-
-.tc-video-card.sky-cyan { background: var(--sky-cyan); }
-.tc-video-card.blue     { background: var(--blue); }
-.tc-video-card.pink     { background: var(--pink); }
-.tc-video-card.lavender { background: var(--lavender); }
 
 @media (max-width: 700px) {
   .tc-video-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tc-video-section {
     padding: 0 20px 60px;
   }
 }
 
-/*Bug Dash Game*/
-.bugdash-wrap {
+/*Tiny Tumble Game*/
+.tinytumble-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -691,13 +838,13 @@
   font-family: 'Space Mono', monospace;
 }
 
-.bugdash-heading {
+.tinytumble-heading {
   color: var(--pink-deep);
-  font-size: 24px;
+  font-size: 60px;
   margin-bottom: 6px;
 }
 
-.bugdash-sub {
+.tinytumble-sub {
   color: var(--ink-soft);
   font-size: 14px;
   margin-top: 0;
@@ -705,7 +852,7 @@
   text-align: center;
 }
 
-.bugdash-game {
+.tinytumble-game {
   position: relative;
   border: 3px solid var(--ink);
   border-radius: 12px;
@@ -713,13 +860,13 @@
   max-width: 100%;
 }
 
-.bugdash-game canvas {
+.tinytumble-game canvas {
   display: block;
   background: var(--cream);
   max-width: 100%;
 }
 
-.bugdash-score {
+.tinytumble-score {
   position: absolute;
   top: 10px;
   right: 16px;
@@ -728,16 +875,15 @@
   color: var(--ink);
 }
 
-.bugdash-highscore {
-  position: absolute;
-  top: 34px;
-  right: 16px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ink-soft);
+.tinytumble-highscore-banner {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--pink-deep);
+  margin-bottom: 12px;
+  text-align: center;
 }
 
-.bugdash-hint {
+.tinytumble-hint {
   position: absolute;
   top: 10px;
   left: 16px;
@@ -745,7 +891,7 @@
   color: var(--ink-soft);
 }
 
-.bugdash-codeline {
+.tinytumble-codeline {
   position: absolute;
   bottom: 8px;
   left: 16px;
@@ -758,7 +904,7 @@
   border-radius: 6px;
 }
 
-.bugdash-overlay {
+.tinytumble-overlay {
   position: absolute;
   inset: 0;
   background: rgba(255,255,255,0.9);
@@ -769,25 +915,31 @@
   text-align: center;
 }
 
-.bugdash-overtitle {
+.tinytumble-overtitle {
   font-size: 20px;
   font-weight: bold;
   color: var(--ink);
 }
 
-.bugdash-overscore {
+.tinytumble-overscore {
   color: var(--ink-soft);
   margin-top: 6px;
 }
 
-.bugdash-newhigh {
+.tinytumble-overscore-best {
+  color: var(--pink-deep);
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.tinytumble-newhigh {
   color: var(--pink-deep);
   font-weight: bold;
   font-size: 14px;
   margin-top: 8px;
 }
 
-.bugdash-restart {
+.tinytumble-restart {
   margin-top: 12px;
   padding: 10px 22px;
   border-radius: 999px;
@@ -799,7 +951,7 @@
   cursor: pointer;
 }
 
-.bugdash-restart:hover {
+.tinytumble-restart:hover {
   filter: brightness(0.88);
 }
 
@@ -882,9 +1034,9 @@
 /* ===== ENROLLMENT PAGE ===== */
 .tc-school-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   align-items: start;
-  gap: 30px;
+  gap: 40px;
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 40px 100px;
@@ -903,13 +1055,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 20px 24px;
+  gap: 16px;
+  padding: 46px 34px;
   border: none;
   background: var(--sky-cyan);
   font-family: 'Baloo 2', sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 28px;
   color: var(--ink);
   cursor: pointer;
   text-align: left;
@@ -925,15 +1077,15 @@
 
 .tc-school-toggle {
   flex-shrink: 0;
-  width: 32px;
-  height: 32px;
+  width: 46px;
+  height: 46px;
   border: 3px solid var(--ink);
   border-radius: 50%;
   background: var(--cream);
   color: var(--ink);
   font-family: 'Space Mono', monospace;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 26px;
   line-height: 1;
   display: flex;
   align-items: center;
@@ -1006,6 +1158,18 @@
 .tc-modal-body {
   padding: 24px;
   overflow-y: auto;
+}
+
+.tc-modal-panel-sm {
+  max-width: 420px;
+}
+
+.tc-fcard-modal-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+  text-align: left;
 }
 
 @media (max-width: 640px) {

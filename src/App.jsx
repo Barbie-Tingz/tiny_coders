@@ -18,7 +18,6 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
             <Route path="/videos" element={<VideoPage/>}/>
             <Route path="/contact" element={<ContactPage/>}/>
-            <Route path="/classes" element={<ClassesPage/>}/>
             <Route path="/schedule" element={<Schedule/>}/>
             <Route path="/enrollment" element={<EnrollmentPage/>}/>
             <Route path="/privacy" element={<PrivacyPolicy/>}/>

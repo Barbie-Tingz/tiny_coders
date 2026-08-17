@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { ref, get, runTransaction } from 'firebase/database';
+import { database } from '../firebase';
 
 const codeLines = [
     ["let", "score", "=", "0"],
@@ -10,14 +12,14 @@ const codeLines = [
 const colors = {
   pink: '#F273C4',
   blue: '#4A5CF0',
-  orange: '#E8432C',
+  purple: '#8B5CF6',
   yellow: '#FFC94A',
   dark: '#1B1B45',
 };
 
-const HIGH_SCORE_KEY = 'bugdash-highscore';
+const HIGH_SCORE_PATH = 'tinyTumble/highScore';
 
-export default function BugDash() {
+export default function TinyTumble() {
   const canvasRef = useRef(null);
   const highScoreRef = useRef(0);
   const [displayScore, setDisplayScore] = useState(0);
@@ -29,13 +31,15 @@ export default function BugDash() {
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
-    try {
-      const saved = Number(localStorage.getItem(HIGH_SCORE_KEY)) || 0;
-      highScoreRef.current = saved;
-      setHighScore(saved);
-    } catch {
-      // localStorage unavailable — high score just won't persist
-    }
+    get(ref(database, HIGH_SCORE_PATH))
+      .then((snapshot) => {
+        const saved = Number(snapshot.val()) || 0;
+        highScoreRef.current = saved;
+        setHighScore(saved);
+      })
+      .catch(() => {
+        // Firebase unavailable/misconfigured — high score just won't persist globally
+      });
   }, []);
 
   useEffect(() => {
@@ -114,23 +118,15 @@ export default function BugDash() {
     };
 
     const drawBug = (o) => {
-      ctx.fillStyle = colors.orange;
+      ctx.fillStyle = colors.purple;
       ctx.beginPath();
-      ctx.ellipse(o.x + o.w / 2, o.y + o.h / 2, o.w / 2, o.h / 2, 0, 0, 7);
+      ctx.roundRect(o.x, o.y, o.w, o.h, 6);
       ctx.fill();
       ctx.strokeStyle = colors.dark;
       ctx.lineWidth = 2;
-      for (let i = 0; i < 3; i++) {
-        const ly = o.y + 6 + i * 7;
-        ctx.beginPath();
-        ctx.moveTo(o.x - 4, ly);
-        ctx.lineTo(o.x + 3, ly);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(o.x + o.w - 3, ly);
-        ctx.lineTo(o.x + o.w + 4, ly);
-        ctx.stroke();
-      }
+      ctx.beginPath();
+      ctx.roundRect(o.x, o.y, o.w, o.h, 6);
+      ctx.stroke();
     };
 
     const drawToken = (o) => {
@@ -166,8 +162,9 @@ export default function BugDash() {
 
       bugTimer--;
       if (bugTimer <= 0) {
-        const h = 22 + Math.random() * 10;
-        bugs.push({ x: canvas.width, y: groundY - h, w: 26, h });
+        const h = 18 + Math.random() * 14;
+        const w = 20 + Math.random() * 14;
+        bugs.push({ x: canvas.width, y: groundY - h, w, h });
         bugTimer = 75 + Math.random() * 50;
       }
 
@@ -195,14 +192,19 @@ export default function BugDash() {
           const finalScoreValue = Math.floor(score);
           setFinalScore(finalScoreValue);
           if (finalScoreValue > highScoreRef.current) {
-            highScoreRef.current = finalScoreValue;
-            setHighScore(finalScoreValue);
-            setIsNewHighScore(true);
-            try {
-              localStorage.setItem(HIGH_SCORE_KEY, String(finalScoreValue));
-            } catch {
-              // localStorage unavailable — high score just won't persist
-            }
+            runTransaction(ref(database, HIGH_SCORE_PATH), (current) => {
+              if (finalScoreValue > (current || 0)) return finalScoreValue;
+              return; // someone else already posted a higher score — leave it alone
+            })
+              .then((result) => {
+                const latest = Number(result.snapshot.val()) || 0;
+                highScoreRef.current = latest;
+                setHighScore(latest);
+                setIsNewHighScore(finalScoreValue >= latest);
+              })
+              .catch(() => {
+                // Firebase unavailable/misconfigured — high score just won't persist globally
+              });
           }
           setGameOver(true);
         }
@@ -266,22 +268,22 @@ export default function BugDash() {
   }, [resetKey]);
 
   return (
-    <div className="bugdash-wrap">
-      <h2 className="bugdash-heading">Tiny Tumble</h2>
-      <p className="bugdash-sub"></p>
-      <div className="bugdash-game">
+    <div className="tinytumble-wrap">
+      <h2 className="tinytumble-heading finger-paint">Tiny Tumble</h2>
+      <p className="tinytumble-sub"></p>
+      <div className="tinytumble-highscore-banner">All-Time Best: {highScore}</div>
+      <div className="tinytumble-game">
         <canvas ref={canvasRef} width={600} height={220} />
-        <div className="bugdash-score">{displayScore}</div>
-        <div className="bugdash-highscore">Best: {highScore}</div>
-        <div className="bugdash-hint">SPACE to jump</div>
-        <div className="bugdash-codeline">{buildingText}</div>
+        <div className="tinytumble-score">{displayScore}</div>
+        <div className="tinytumble-hint">SPACE to jump</div>
+        <div className="tinytumble-codeline">{buildingText}</div>
         {gameOver && (
-          <div className="bugdash-overlay">
-            <div className="bugdash-overtitle">Game over</div>
-            <div className="bugdash-overscore">Score: {finalScore}</div>
-            <div className="bugdash-overscore">Best: {highScore}</div>
-            {isNewHighScore && <div className="bugdash-newhigh">New high score!</div>}
-            <button className="bugdash-restart" onClick={() => setResetKey((k) => k + 1)}>
+          <div className="tinytumble-overlay">
+            <div className="tinytumble-overtitle">Game over</div>
+            <div className="tinytumble-overscore">Score: {finalScore}</div>
+            <div className="tinytumble-overscore tinytumble-overscore-best">Best: {highScore}</div>
+            {isNewHighScore && <div className="tinytumble-newhigh">New high score!</div>}
+            <button className="tinytumble-restart" onClick={() => setResetKey((k) => k + 1)}>
               Play again
             </button>
           </div>

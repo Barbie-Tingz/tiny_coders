@@ -24,7 +24,6 @@ function Navbar() {
 
             <ul className={`tc-nav-links${menuOpen ? " open" : ""}`}>
                 <li><NavLink to="/" end className={linkClass} onClick={closeMenu}>Home</NavLink></li>
-                <li><NavLink to="/classes" className={linkClass} onClick={closeMenu}>Classes</NavLink></li>
                 <li><NavLink to="/enrollment" className={linkClass} onClick={closeMenu}>Enrollment</NavLink></li>
                 <li><NavLink to="/videos" className={linkClass} onClick={closeMenu}>Videos</NavLink></li>
                 <li><NavLink to="/contact" className={linkClass} onClick={closeMenu}>Contact</NavLink></li>

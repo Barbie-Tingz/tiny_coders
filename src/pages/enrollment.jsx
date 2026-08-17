@@ -37,7 +37,7 @@ function EnrollmentPage() {
     return(
         <div className="tc-page">
             <div className="tc-page-hero">
-                <div className="tc-unique-eyebrow">JOIN A CLASS</div>
+                <div className="tc-unique-eyebrow">JOIN OUR PROGRAM</div>
                 <div className="finger-paint font-md">Enrollment</div>
             </div>
 

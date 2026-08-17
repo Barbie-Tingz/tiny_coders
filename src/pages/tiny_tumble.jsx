@@ -1,6 +1,22 @@
 import { useEffect, useRef, useState } from 'react';
-import { ref, get, runTransaction } from 'firebase/database';
-import { database } from '../firebase';
+
+// Firebase is loaded lazily (and cached) so the game's canvas/render code
+// doesn't have to wait on it — the high-score sync happens in the background.
+let firebasePromise = null;
+function loadFirebase() {
+  if (!firebasePromise) {
+    firebasePromise = Promise.all([
+      import('firebase/database'),
+      import('../firebase'),
+    ]).then(([db, app]) => ({
+      ref: db.ref,
+      get: db.get,
+      runTransaction: db.runTransaction,
+      database: app.database,
+    }));
+  }
+  return firebasePromise;
+}
 
 const codeLines = [
     ["let", "score", "=", "0"],
@@ -31,7 +47,8 @@ export default function TinyTumble() {
   const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
-    get(ref(database, HIGH_SCORE_PATH))
+    loadFirebase()
+      .then(({ ref, get, database }) => get(ref(database, HIGH_SCORE_PATH)))
       .then((snapshot) => {
         const saved = Number(snapshot.val()) || 0;
         highScoreRef.current = saved;
@@ -193,10 +210,13 @@ export default function TinyTumble() {
           const finalScoreValue = Math.floor(score);
           setFinalScore(finalScoreValue);
           if (finalScoreValue > highScoreRef.current) {
-            runTransaction(ref(database, HIGH_SCORE_PATH), (current) => {
-              if (finalScoreValue > (current || 0)) return finalScoreValue;
-              return; // someone else already posted a higher score — leave it alone
-            })
+            loadFirebase()
+              .then(({ ref, runTransaction, database }) =>
+                runTransaction(ref(database, HIGH_SCORE_PATH), (current) => {
+                  if (finalScoreValue > (current || 0)) return finalScoreValue;
+                  return; // someone else already posted a higher score — leave it alone
+                })
+              )
               .then((result) => {
                 const latest = Number(result.snapshot.val()) || 0;
                 highScoreRef.current = latest;

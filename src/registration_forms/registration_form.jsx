@@ -1,5 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
+import { ref as dbRef, onValue } from 'firebase/database';
+import { database } from '../firebase';
+
+const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_eVq9ATgR5dIo2C5fl41Jm00';
 
 function RegistrationForm({ formId, schoolName, day }) {
   const [state, handleSubmit] = useForm(formId);
@@ -7,7 +11,27 @@ function RegistrationForm({ formId, schoolName, day }) {
   const [photoRelease, setPhotoRelease] = useState(false);
   const [liabilityWaiver, setLiabilityWaiver] = useState(false);
   const [privacyAck, setPrivacyAck] = useState(false);
+  const [hasClickedPay, setHasClickedPay] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  const paymentRef = useRef(null);
+  if (!paymentRef.current) {
+    paymentRef.current = crypto.randomUUID();
+  }
   const consentComplete = photoRelease && liabilityWaiver && privacyAck;
+
+  useEffect(() => {
+    if (!hasClickedPay) return;
+
+    const statusRef = dbRef(database, `payments/${paymentRef.current}`);
+    const unsubscribe = onValue(statusRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data && data.paid) {
+        setPaymentConfirmed(true);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [hasClickedPay]);
 
   if (state.succeeded) {
     return (
@@ -192,22 +216,38 @@ function RegistrationForm({ formId, schoolName, day }) {
           )}
           <p className="tc-form-note">Tuition is $99.95/month, billed monthly with no long-term contract.</p>
 
-          <label className="tc-form-label" htmlFor="payment_method">Preferred Payment Method</label>
-          <select
-            className="tc-form-input tc-form-select"
-            id="payment_method"
-            name="payment_method"
-            required
-            defaultValue=""
-            disabled={!consentComplete}
+          <a
+            className="tc-form-pay-btn"
+            href={`${STRIPE_PAYMENT_LINK}?client_reference_id=${paymentRef.current}`}
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => {
+              if (!consentComplete) {
+                e.preventDefault();
+                return;
+              }
+              setHasClickedPay(true);
+            }}
           >
-            <option value="" disabled>Select a method</option>
-            <option value="Card">Credit Card</option>
-          </select>
+            Pay with Card (Stripe) →
+          </a>
+
+          <input type="hidden" name="payment_ref" value={paymentRef.current} />
+
+          {!paymentConfirmed && (
+            <p className="tc-form-note">
+              {hasClickedPay
+                ? 'Waiting for payment confirmation from Stripe — this updates automatically once payment completes.'
+                : 'You must complete payment above before you can submit your registration.'}
+            </p>
+          )}
+          {paymentConfirmed && (
+            <p className="tc-form-note">Payment confirmed — you're all set to submit below.</p>
+          )}
         </div>
       </fieldset>
 
-      <button className="tc-form-submit" type="submit" disabled={state.submitting}>
+      <button className="tc-form-submit" type="submit" disabled={state.submitting || !paymentConfirmed}>
         Submit Registration
       </button>
     </form>

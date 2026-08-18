@@ -607,6 +607,29 @@
   color: var(--ink);
 }
 
+.tc-form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.tc-form-row .tc-form-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.tc-form-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 400px) {
+  .tc-form-row {
+    flex-direction: column;
+  }
+}
+
 .tc-form-input:focus {
   outline: none;
   border-color: var(--blue);

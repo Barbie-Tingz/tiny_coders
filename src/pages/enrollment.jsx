@@ -41,9 +41,9 @@ function EnrollmentPage() {
 
             <div className="tc-enrollment-info-wrap">
                 <div className="tc-enrollment-info">
-                    <p>Tiny Coders sessions take place onsite at your school, on the day your school selects (see the registration form for details).</p>         
-                    <p>Hours of operation are 3:00 PM – 4:30 PM.</p>
-                    <p>All laptops and supplies are provided by Tiny Coders.</p>
+                    <p>Tiny Coders sessions take place onsite at your school</p>         
+                    <p>Hours of operation are 3:00 PM – 4:30 PM</p>
+                    <p>All laptops and supplies are provided by Tiny Coders</p>
                 </div>
             </div>
 

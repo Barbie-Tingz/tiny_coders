@@ -7,10 +7,10 @@ function PrivacyPolicy(){
             </div>
 
             <div className="tc-policy-wrap">
-                <p className="tc-policy-updated">Last updated: [Month Day, Year]</p>
+                <p className="tc-policy-updated">Last updated: [August, 2026]</p>
 
                 <p className="tc-policy-intro">
-                    Tiny Coders ("we," "us," or "our") respects your family's privacy. This policy explains what
+                    Tiny Coders respects your family's privacy. This policy explains what
                     information we collect when you contact us or register a child for a class, how we use it, and
                     the choices you have. <em>This is a template policy — replace the bracketed details and have it
                     reviewed by a legal professional before publishing.</em>

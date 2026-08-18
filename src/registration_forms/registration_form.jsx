@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { ref as dbRef, onValue } from 'firebase/database';
 import { database } from '../firebase';
+import { loadStripe } from '@stripe/stripe-js';
 
-const STRIPE_PAYMENT_LINK = 'https://buy.stripe.com/test_eVq9ATgR5dIo2C5fl41Jm00';
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function RegistrationForm({ formId, schoolName, day }) {
   const [state, handleSubmit] = useForm(formId);
@@ -11,17 +12,19 @@ function RegistrationForm({ formId, schoolName, day }) {
   const [photoRelease, setPhotoRelease] = useState(false);
   const [liabilityWaiver, setLiabilityWaiver] = useState(false);
   const [privacyAck, setPrivacyAck] = useState(false);
-  const [hasClickedPay, setHasClickedPay] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  const [checkoutSubmitted, setCheckoutSubmitted] = useState(false);
+  const [checkoutError, setCheckoutError] = useState(false);
+  const checkoutContainerRef = useRef(null);
+  const embeddedCheckoutRef = useRef(null);
   const paymentRef = useRef(null);
   if (!paymentRef.current) {
     paymentRef.current = crypto.randomUUID();
   }
   const consentComplete = photoRelease && liabilityWaiver && privacyAck;
 
+  // Listen for the webhook (api/stripe-webhook.js) confirming payment actually succeeded.
   useEffect(() => {
-    if (!hasClickedPay) return;
-
     const statusRef = dbRef(database, `payments/${paymentRef.current}`);
     const unsubscribe = onValue(statusRef, (snapshot) => {
       const data = snapshot.val();
@@ -31,7 +34,54 @@ function RegistrationForm({ formId, schoolName, day }) {
     });
 
     return () => unsubscribe();
-  }, [hasClickedPay]);
+  }, []);
+
+  // Once consent is complete, create a Stripe Checkout Session and mount it inline.
+  useEffect(() => {
+    if (!consentComplete || paymentConfirmed) return;
+    let cancelled = false;
+
+    (async () => {
+      try {
+        const stripe = await stripePromise;
+        const res = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ paymentRef: paymentRef.current }),
+        });
+        const data = await res.json();
+
+        if (cancelled || !data.clientSecret || !checkoutContainerRef.current) {
+          if (!cancelled) setCheckoutError(true);
+          return;
+        }
+
+        const embeddedCheckout = await stripe.initEmbeddedCheckout({
+          clientSecret: data.clientSecret,
+          onComplete: () => setCheckoutSubmitted(true),
+        });
+
+        if (cancelled) {
+          embeddedCheckout.destroy();
+          return;
+        }
+
+        embeddedCheckoutRef.current = embeddedCheckout;
+        embeddedCheckout.mount(checkoutContainerRef.current);
+      } catch (err) {
+        console.error('Failed to load embedded checkout:', err);
+        if (!cancelled) setCheckoutError(true);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (embeddedCheckoutRef.current) {
+        embeddedCheckoutRef.current.destroy();
+        embeddedCheckoutRef.current = null;
+      }
+    };
+  }, [consentComplete, paymentConfirmed]);
 
   if (state.succeeded) {
     return (
@@ -216,31 +266,25 @@ function RegistrationForm({ formId, schoolName, day }) {
           )}
           <p className="tc-form-note">Tuition is $99.95/month, billed monthly with no long-term contract.</p>
 
-          <a
-            className="tc-form-pay-btn"
-            href={`${STRIPE_PAYMENT_LINK}?client_reference_id=${paymentRef.current}`}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(e) => {
-              if (!consentComplete) {
-                e.preventDefault();
-                return;
-              }
-              setHasClickedPay(true);
-            }}
-          >
-            Pay with Card (Stripe) →
-          </a>
-
           <input type="hidden" name="payment_ref" value={paymentRef.current} />
 
-          {!paymentConfirmed && (
+          {checkoutError && (
             <p className="tc-form-note">
-              {hasClickedPay
-                ? 'Waiting for payment confirmation from Stripe — this updates automatically once payment completes.'
-                : 'You must complete payment above before you can submit your registration.'}
+              Something went wrong loading the payment form. Please refresh and try again.
             </p>
           )}
+
+          {!paymentConfirmed && !checkoutError && (
+            <>
+              <div ref={checkoutContainerRef} className="tc-checkout-embed"></div>
+              <p className="tc-form-note">
+                {checkoutSubmitted
+                  ? 'Confirming your payment with Stripe — this updates automatically, usually within a few seconds.'
+                  : 'Complete payment above to unlock the Submit button below.'}
+              </p>
+            </>
+          )}
+
           {paymentConfirmed && (
             <p className="tc-form-note">Payment confirmed — you're all set to submit below.</p>
           )}

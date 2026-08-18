@@ -732,6 +732,15 @@
   transform: translate(-2px, -2px);
 }
 
+.tc-checkout-embed {
+  margin-top: 14px;
+  min-height: 200px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+
 .tc-form-success {
   font-family: 'Baloo 2', sans-serif;
   font-weight: 700;
